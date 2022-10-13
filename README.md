@@ -11,9 +11,22 @@ Point-M2AE is a strong **M**ulti-scale **M**AE pre-training framework for hierar
 </div>
 
 ## Point-M2AE Models
+The pre-trained Point-M2AE is evaluated by Linear SVM on both ModelNet40 and ScanObjectNN datasets, without downstream fine-tuning:
 | Task | Dataset | Config | MN40 Acc.| SONN Acc.| Ckpts | Logs |   
 | :-----: | :-----: |:-----:| :-----: | :-----:| :-----:|:-----:|
 | Pre-training | ShapeNet |[point-m2ae.yaml](./cfgs/pre-training/point-m2ae.yaml)| 92.87% | 72.07% | [best-ckpt.pth](https://drive.google.com/file/d/1mkfoGSp01th9Pctlk_mE0o-5sOb3vQpD/view?usp=sharing) | [log](https://drive.google.com/file/d/1svx_CQ2x8dRDrf9C_jSDIXYYyJO8KG4m/view?usp=sharing) |
+
+After pre-training, we fine-tune Point-M2AE on three downstream tasks:
+| Task | Dataset | Config | Acc.| Ckpts | Logs |   
+| :-----: | :-----: |:-----:| :-----: | :-----:|:-----:|
+| Classification | ModelNet40 |-| - | - | - |
+| Classification | ScanObjectNN |-| - | - | - |
+| Segmentation | ShapeNetPart |-| - | - | - |
+
+
+|  Task | Dataset | Config | 5w10s | 5w20s | 10w10s| 10w20s|     
+| :-----: | :-----: |:-----:| :-----: | :-----:|:-----:|:-----:|
+|  Few-shot Cls. | ModelNet40 |-| -| -| -|-| 
 
 
 ## Requirements
