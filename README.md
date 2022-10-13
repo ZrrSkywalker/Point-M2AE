@@ -10,8 +10,26 @@ Point-M2AE is a strong **M**ulti-scale **M**AE pre-training framework for hierar
   <img src="pipeline.jpg"/>
 </div>
 
-## Installation
-Coming Soon.
+## Requirements
+
+### Installation
+### Datasets
+Coming in a few days.
+
+## Get Started
+
+### Pre-training
+Point-M2AE is pre-trained on ShapeNet dataset with the config file `cfgs/pre-training/point-m2ae.yaml`. Run:
+```bash
+CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/pre-training/point-m2ae.yaml --exp_name pre-train
+```
+To evaluate the pre-trained Point-M2AE by Linear SVM on ModelNet40, create the folder `ckpts/` and download the `ckpt-best.pth` into it. Run:
+```bash
+CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/pre-training/point-m2ae.yaml --exp_name test_svm --test_svm modelnet40 --ckpts ./ckpt-best.pth
+```
+
+### Fine-tuning
+Coming in a few days.
 
 ## Contact
 If you have any question about this project, please feel free to contact zhangrenrui@pjlab.org.cn.
