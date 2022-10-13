@@ -77,7 +77,7 @@ def main():
         config.dataset.val.others.fold = args.fold
         
 
-    if args.test_svm:
+    if args.test_svm == 'modelnet40':
         test_svm_modelnet40(args, config)
     else:
         pretrain(args, config, train_writer, val_writer)
