@@ -10,6 +10,12 @@ Point-M2AE is a strong **M**ulti-scale **M**AE pre-training framework for hierar
   <img src="pipeline.jpg"/>
 </div>
 
+## Point-M2AE Models
+| Task | Dataset | Config | MN40 Acc.| SONN Acc.| Ckpts | Logs |   
+| :-----: | :-----: |:-----:| :-----: | :-----:| :-----:|:-----:|
+| Pre-training | ShapeNet |[point-m2ae.yaml](./cfgs/pre-training/point-m2ae.yaml)| 92.87% | 72.07% | [best-ckpt.pth]() | [log]() |
+
+
 ## Requirements
 
 ### Installation
@@ -56,6 +62,19 @@ CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/pre-training/point-m2ae.yaml
 ```
 ### Fine-tuning
 Coming in a few days.
+
+## Acknowledgement
+This repo benefits from [Point-BERT](https://github.com/lulutang0608/Point-BERT) and [Point-MAE](https://github.com/Pang-Yatian/Point-MAE). Thanks for their wonderful works.
+
+## Citation
+```bash
+@article{zhang2022point,
+  title={Point-M2AE: Multi-scale Masked Autoencoders for Hierarchical Point Cloud Pre-training},
+  author={Zhang, Renrui and Guo, Ziyu and Gao, Peng and Fang, Rongyao and Zhao, Bin and Wang, Dong and Qiao, Yu and Li, Hongsheng},
+  journal={arXiv preprint arXiv:2205.14401},
+  year={2022}
+}
+```
 
 ## Contact
 If you have any question about this project, please feel free to contact zhangrenrui@pjlab.org.cn.
