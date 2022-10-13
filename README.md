@@ -41,7 +41,7 @@ pip install "git+https://github.com/erikwijmans/Pointnet2_PyTorch.git#egg=pointn
 pip install --upgrade https://github.com/unlimblue/KNN_CUDA/releases/download/0.2/KNN_CUDA-0.2-py3-none-any.whl
 ```
 ### Datasets
-We utilize ShapeNet, ModelNet40, ScanObjectNN, and ShapeNetPart for pre-training and fine-tuning. Please check DATASET.md for details.
+Follow [DATASET.md](https://github.com/lulutang0608/Point-BERT/blob/master/DATASET.md) to install ShapeNet, ModelNet40, ScanObjectNN, and ShapeNetPart datasets, referring to Point-BERT.
 
 ## Get Started
 
