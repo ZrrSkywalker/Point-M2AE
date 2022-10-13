@@ -11,15 +11,18 @@ Point-M2AE is a strong **M**ulti-scale **M**AE pre-training framework for hierar
 </div>
 
 ## Point-M2AE Models
-The pre-trained Point-M2AE is evaluated by Linear SVM on both ModelNet40 and ScanObjectNN datasets, without downstream fine-tuning:
+The pre-trained Point-M2AE is evaluated by **Linear SVM** on both ModelNet40 and ScanObjectNN datasets, without downstream fine-tuning:
 | Task | Dataset | Config | MN40 Acc.| SONN Acc.| Ckpts | Logs |   
 | :-----: | :-----: |:-----:| :-----: | :-----:| :-----:|:-----:|
 | Pre-training | ShapeNet |[point-m2ae.yaml](./cfgs/pre-training/point-m2ae.yaml)| 92.87% | 72.07% | [best-ckpt.pth](https://drive.google.com/file/d/1mkfoGSp01th9Pctlk_mE0o-5sOb3vQpD/view?usp=sharing) | [log](https://drive.google.com/file/d/1svx_CQ2x8dRDrf9C_jSDIXYYyJO8KG4m/view?usp=sharing) |
 
 After pre-training, we fine-tune Point-M2AE on three downstream tasks:
+
+Coming in a few days.
+
 | Task | Dataset | Config | Acc.| Ckpts | Logs |   
 | :-----: | :-----: |:-----:| :-----: | :-----:|:-----:|
-| Classification | ModelNet40 |-| - | - | - |
+| Classification | ModelNet40 (1k)|-| - | - | - |
 | Classification | ScanObjectNN |-| - | - | - |
 | Segmentation | ShapeNetPart |-| - | - | - |
 
@@ -84,7 +87,8 @@ Point-M2AE is pre-trained on ShapeNet dataset with the config file `cfgs/pre-tra
 ```bash
 CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/pre-training/point-m2ae.yaml --exp_name pre-train
 ```
-To evaluate the pre-trained Point-M2AE by Linear SVM on ModelNet40, create the folder `ckpts/` and download the [ckpt-best.pth](https://drive.google.com/file/d/1mkfoGSp01th9Pctlk_mE0o-5sOb3vQpD/view?usp=sharing) into it. You will get 92.87% by running:
+
+To evaluate the pre-trained Point-M2AE by **Linear SVM on ModelNet40**, create the folder `ckpts/` and download the [ckpt-best.pth](https://drive.google.com/file/d/1mkfoGSp01th9Pctlk_mE0o-5sOb3vQpD/view?usp=sharing) into it. You will get 92.87% by running:
 ```bash
 CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/pre-training/point-m2ae.yaml --exp_name test_svm --test_svm modelnet40 --ckpts ./ckpts/ckpt-best.pth
 ```
