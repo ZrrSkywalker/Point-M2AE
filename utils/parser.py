@@ -49,8 +49,8 @@ def get_args():
         help = 'test for certain ckpt')
     parser.add_argument(
         '--test_svm', 
-        action='store_true', 
-        default=False, 
+        choices=['modelnet40', 'scanobjectnn'],
+        default=None,
         help = 'test_svm for certain ckpt')
     parser.add_argument(
         '--finetune_model', 
