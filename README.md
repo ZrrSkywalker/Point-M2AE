@@ -13,8 +13,35 @@ Point-M2AE is a strong **M**ulti-scale **M**AE pre-training framework for hierar
 ## Requirements
 
 ### Installation
+Create a conda environment and install basic dependencies:
+```bash
+git clone https://github.com/ZrrSkywalker/Point-M2AE.git
+cd Point-M2AE
+
+conda create -n pointm2ae python=3.7
+conda activate pointm2ae
+
+pip install -r requirements.txt
+
+# Install the according versions of torch and torchvision
+conda install pytorch torchvision cudatoolkit
+```
+Install GPU-related packages:
+```bash
+# Chamfer Distance and EMD
+cd ./extensions/chamfer_dist
+python setup.py install --user
+cd ../emd
+python setup.py install --user
+
+# PointNet++
+pip install "git+https://github.com/erikwijmans/Pointnet2_PyTorch.git#egg=pointnet2_ops&subdirectory=pointnet2_ops_lib"
+
+# GPU kNN
+pip install --upgrade https://github.com/unlimblue/KNN_CUDA/releases/download/0.2/KNN_CUDA-0.2-py3-none-any.whl
+```
 ### Datasets
-Coming in a few days.
+We utilize ShapeNet, ModelNet40, ScanObjectNN, and ShapeNetPart for pre-training and fine-tuning. Please check DATASET.md for details.
 
 ## Get Started
 
