@@ -20,16 +20,16 @@ After pre-training, we fine-tune Point-M2AE on three downstream tasks:
 
 Coming in a few days.
 
-| Task | Dataset | Config | Acc.| Ckpts | Logs |   
-| :-----: | :-----: |:-----:| :-----: | :-----:|:-----:|
-| Classification | ModelNet40 (1k)|-| - | - | - |
-| Classification | ScanObjectNN |-| - | - | - |
-| Segmentation | ShapeNetPart |-| - | - | - |
+| Task | Dataset | Config | Acc.| Vote| Ckpts | Logs |   
+| :-----: | :-----: |:-----:| :-----:| :-----: | :-----:|:-----:|
+| Classification | ModelNet40 (1k)| -|93.43%| 93.96% | - | - |
+| Classification | ScanObjectNN |-| 86.43%| -| - | - |
+| Segmentation | ShapeNetPart |-| 86.51% | -| - | - |
 
 
 |  Task | Dataset | Config | 5w10s | 5w20s | 10w10s| 10w20s|     
 | :-----: | :-----: |:-----:| :-----: | :-----:|:-----:|:-----:|
-|  Few-shot Cls. | ModelNet40 |-| -| -| -|-| 
+|  Few-shot Cls. | ModelNet40 |-| 96.8%|98.3%|92.3%|95.0%|
 
 
 ## Requirements
