@@ -1,5 +1,6 @@
 # Point-M2AE: Multi-scale Masked Autoencoders for Hierarchical Point Cloud Pre-training
 
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/point-m2ae-multi-scale-masked-autoencoders/3d-point-cloud-linear-classification-on)](https://paperswithcode.com/sota/3d-point-cloud-linear-classification-on?p=point-m2ae-multi-scale-masked-autoencoders)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/point-m2ae-multi-scale-masked-autoencoders/3d-point-cloud-classification-on-scanobjectnn)](https://paperswithcode.com/sota/3d-point-cloud-classification-on-scanobjectnn?p=point-m2ae-multi-scale-masked-autoencoders)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/point-m2ae-multi-scale-masked-autoencoders/3d-point-cloud-classification-on-modelnet40)](https://paperswithcode.com/sota/3d-point-cloud-classification-on-modelnet40?p=point-m2ae-multi-scale-masked-autoencoders)
 
