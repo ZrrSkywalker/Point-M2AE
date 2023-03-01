@@ -8,6 +8,9 @@ Official implementation of ['Point-M2AE: Multi-scale Masked Autoencoders for Hie
 
 The paper has been accepted by **NeurIPS 2022**.
 
+## News
+* Our latest work, [I2P-MAE](https://arxiv.org/pdf/2212.06785.pdf) has been accepted by **CVPR 2023** 🔥 and [open-sourced](https://github.com/ZrrSkywalker/I2P-MAE). I2P-MAE leverges 2D pre-trained models to guide the pre-training of Point-M2AE and achieves *SOTA* performance on various 3D tasks.
+
 ## Introduction
 Point-M2AE is a strong **M**ulti-scale **M**AE pre-training framework for hierarchical self-supervised learning of 3D point clouds. Unlike the standard transformer in MAE, we modify the encoder and decoder into pyramid architectures to progressively model spatial geometries and capture both fine-grained and high-level semantics of 3D shapes. We design a multi-scale masking strategy to generate consistent visible regions across scales, and reconstruct the masked coordinates from a global-to-local perspective.
 
