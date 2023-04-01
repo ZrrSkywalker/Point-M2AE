@@ -40,14 +40,14 @@ After pre-training, we fine-tune Point-M2AE on three downstream tasks:
 
 | Task | Dataset | Config | Acc.| Vote| Ckpts | Logs |   
 | :-----: | :-----: |:-----:| :-----:| :-----: | :-----:|:-----:|
-| Classification | ModelNet40 (1k)| [modelnet40.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/modelnet40.yaml)|93.43%| 93.96% | - | - |
+| Classification | ModelNet40 (1k)| [modelnet40.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/modelnet40.yaml)|93.43%| 93.96% | [modelnet40.pth](https://drive.google.com/file/d/1VvjVSGN4zA3WbTqnnB5fA8WgoiRobf9y/view?usp=share_link) | [modelnet40.log](https://drive.google.com/drive/folders/1SNYQGmfvWN5PPOKa-uA5F-0Gbz-1MajR?usp=share_link) |
 
 
 | Task | Dataset | Split | Config | Acc.| Ckpts | Logs |   
 | :-----: | :-----: | :-----:|:-----:| :-----:| :-----:|:-----:|
-| Classification | ScanObjectNN| [OBJ-BG](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_obj-bg.yaml) |-| 91.22%| - | - |
-| Classification | ScanObjectNN| [OBJ-ONLY](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_obj.yaml) |-| 88.81%| - | - |
-| Classification | ScanObjectNN| [PB-T50-RS](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_pb.yaml) |-| 86.43%| - | - |
+| Classification | ScanObjectNN| PB-T50-RS|[scan_pb.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_pb.yaml) | 86.43%| [scan_pd.pth](https://drive.google.com/file/d/1Fdz_I9TLThL2HZkWVGZ9p-9_WVIUOInE/view?usp=share_link) | [scan_pd.log](https://drive.google.com/drive/folders/1SNYQGmfvWN5PPOKa-uA5F-0Gbz-1MajR?usp=share_link) |
+| Classification | ScanObjectNN|OBJ-BG| [scan_obj-bg.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_obj-bg.yaml) | 91.22%| - | - |
+| Classification | ScanObjectNN| OBJ-ONLY| [scan_obj.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_obj.yaml) | 88.81%| - | - |
 
 
 | Task | Dataset | Config | Acc.| Vote| Ckpts | Logs |   
@@ -101,7 +101,7 @@ The final directory structure should be:
 ├──data/
 │   ├──ModelNet/
 │   ├──ModelNetFewshot/
-│   ├──modelnet40_ply_hdf5_2048/
+│   ├──modelnet40_ply_hdf5_2048/  # Specially for Linear SVM
 │   ├──ScanObjectNN/
 │   ├──ShapeNet55-34/
 │   ├──shapenetcore_partanno_segmentation_benchmark_v0_normal/
@@ -116,12 +116,59 @@ Point-M2AE is pre-trained on ShapeNet dataset with the config file `cfgs/pre-tra
 CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/pre-training/point-m2ae.yaml --exp_name pre-train
 ```
 
-To evaluate the pre-trained Point-M2AE by **Linear SVM on ModelNet40**, create the folder `ckpts/` and download the [ckpt-best.pth](https://drive.google.com/file/d/1mkfoGSp01th9Pctlk_mE0o-5sOb3vQpD/view?usp=sharing) into it. You will get 92.87% by running:
+To evaluate the pre-trained Point-M2AE by **Linear SVM**, create the folder `ckpts/` and download the [pre-train.pth](https://drive.google.com/file/d/1HyUEv04V2K6vMaR0P7WksuoiMtoXx1fM/view?usp=share_link) into it.
+
+For ModelNet40, run:
 ```bash
-CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/pre-training/point-m2ae.yaml --exp_name test_svm --test_svm modelnet40 --ckpts ./ckpts/ckpt-best.pth
+CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/linear-svm/modelnet40.yaml --test_svm modelnet40 --exp_name test_svm --ckpts ./ckpts/pre-train.pth
 ```
+For ScanObjectNN (OBJ-BG split), run:
+```bash
+CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/linear-svm/scan_obj-bg.yaml --test_svm scan --exp_name test_svm --ckpts ./ckpts/pre-train.pth
+```
+
 ### Fine-tuning
-Coming in a few days.
+Please create the folder `ckpts/` and download the [pre-train.pth](https://drive.google.com/file/d/1HyUEv04V2K6vMaR0P7WksuoiMtoXx1fM/view?usp=share_link) into it.
+
+For ModelNet40, run:
+```bash
+CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/ModelNet40.yaml --exp_name finetune --finetune_model --ckpts ckpts/pre-train.pth
+```
+
+For the three splits of ScanObjectNN, run:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/scan_pb.yaml --exp_name finetune --finetune_model --ckpts ckpts/pre-train.pth
+```
+```bash
+CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/scan_obj.yaml --exp_name finetune --finetune_model --ckpts ckpts/pre-train.pth
+```
+```bash
+CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/scan_obj-bg.yaml --exp_name finetune --finetune_model --ckpts ckpts/pre-train.pth
+```
+
+### Evaluation
+Please download the pre-trained models from [here](https://drive.google.com/file/d/1VvjVSGN4zA3WbTqnnB5fA8WgoiRobf9y/view?usp=share_link) and put them into the folder `ckpts/`.
+
+For ModelNet40 **without voting**, run:
+```bash
+CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/modelnet40.yaml --exp_name finetune --test --ckpts ckpts/modelnet.pth
+```
+For ModelNet40 **with voting**, run:
+```bash
+CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/modelnet40.yaml --exp_name finetune_vote --test --ckpts ckpts/modelnet.pth --vote
+```
+
+For the three splits of ScanObjectNN, run:
+```bash
+CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/scan_pb.yaml --exp_name finetune --test --ckpts ckpts/scan_pb.pth
+```
+```bash
+CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/scan_obj.yaml --exp_name finetune --test --ckpts ckpts/scan_obj.pth
+```
+```bash
+CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/scan_obj-bg.yaml --exp_name finetune --test --ckpts ckpts/scan_obj-bg.pth
+```
 
 ## Acknowledgement
 This repo benefits from [Point-BERT](https://github.com/lulutang0608/Point-BERT) and [Point-MAE](https://github.com/Pang-Yatian/Point-MAE). Thanks for their wonderful works.
