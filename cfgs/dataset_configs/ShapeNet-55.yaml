@@ -1,4 +1,0 @@
-NAME: ShapeNet
-DATA_PATH: data/ShapeNet55-34/ShapeNet-55
-N_POINTS: 8192
-PC_PATH: data/ShapeNet55-34/shapenet_pc
