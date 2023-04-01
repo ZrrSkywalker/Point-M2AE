@@ -6,7 +6,7 @@ import torch.optim as optim
 # dataloader
 from torch.utils.data import DataLoader
 from datasets import build_dataset_from_cfg
-from datasets.ModelNetDataset import ModelNet40SVM
+from datasets.ModelNetDataset import ModelNet40_SVM
 
 from models import build_model_from_cfg
 # utils
@@ -36,9 +36,9 @@ def dataset_builder(args, config):
                                                 worker_init_fn=worker_init_fn)
     return sampler, dataloader
 
-def dataset_builder_modelnet40():
-    train_val_loader = DataLoader(ModelNet40SVM(partition='train', num_points=1024), num_workers=8, batch_size=128, shuffle=True)
-    test_val_loader = DataLoader(ModelNet40SVM(partition='test', num_points=1024), num_workers=8, batch_size=128, shuffle=True)
+def dataset_builder_svm(config):
+    train_val_loader = DataLoader(build_dataset_from_cfg(config.train._base_, config.train.others), num_workers=8, batch_size=128, shuffle=True)
+    test_val_loader = DataLoader(build_dataset_from_cfg(config.test._base_, config.test.others), num_workers=8, batch_size=128, shuffle=True)
     return train_val_loader, test_val_loader
 
 def model_builder(config):
@@ -152,13 +152,9 @@ def load_model(base_model, ckpt_path, logger = None):
 
     # load state dict
     state_dict = torch.load(ckpt_path, map_location='cpu')
+    
     # parameter resume of base model
-    if state_dict.get('model') is not None:
-        base_ckpt = {k.replace("module.", ""): v for k, v in state_dict['model'].items()}
-    elif state_dict.get('base_model') is not None:
-        base_ckpt = {k.replace("module.", ""): v for k, v in state_dict['base_model'].items()}
-    else:
-        raise RuntimeError('mismatch of ckpt weight')
+    base_ckpt = {k.replace("module.", ""): v for k, v in state_dict['base_model'].items()}
     base_model.load_state_dict(base_ckpt, strict = True)
 
     epoch = -1
