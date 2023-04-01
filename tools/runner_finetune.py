@@ -210,16 +210,6 @@ def run_net(args, config, train_writer=None, val_writer=None):
                 best_metrics = metrics
                 builder.save_checkpoint(base_model, optimizer, epoch, metrics, best_metrics, 'ckpt-best', args, logger = logger)
                 print_log("--------------------------------------------------------------------------------------------", logger=logger)
-            if args.vote:
-                if metrics.acc > 92.1 or (better and metrics.acc > 91):
-                    metrics_vote = validate_vote(base_model, test_dataloader, epoch, val_writer, args, config, logger=logger)
-                    if metrics_vote.better_than(best_metrics_vote):
-                        best_metrics_vote = metrics_vote
-                        print_log(
-                            "****************************************************************************************",
-                            logger=logger)
-                        builder.save_checkpoint(base_model, optimizer, epoch, metrics, best_metrics_vote, 'ckpt-best_vote', args, logger = logger)
-
         builder.save_checkpoint(base_model, optimizer, epoch, metrics, best_metrics, 'ckpt-last', args, logger = logger)      
     if train_writer is not None:
         train_writer.close()
@@ -352,7 +342,6 @@ def test_net(args, config):
     test(base_model, test_dataloader, args, config, logger=logger)
     
 def test(base_model, test_dataloader, args, config, logger = None):
-
     base_model.eval()  # set model to eval mode
 
     test_pred  = []
@@ -390,14 +379,12 @@ def test(base_model, test_dataloader, args, config, logger = None):
 
         print_log(f"[TEST_VOTE]", logger = logger)
         acc = 0.
-        for time in range(1, 300):
+        for time in range(1, 50):
             this_acc = test_vote(base_model, test_dataloader, 1, None, args, config, logger=logger, times=10)
             if acc < this_acc:
                 acc = this_acc
             print_log('[TEST_VOTE_time %d]  acc = %.4f, best acc = %.4f' % (time, this_acc, acc), logger=logger)
         print_log('[TEST_VOTE] acc = %.4f' % acc, logger=logger)
-    
-
 
 def test_vote(base_model, test_dataloader, epoch, val_writer, args, config, logger = None, times = 10):
 
