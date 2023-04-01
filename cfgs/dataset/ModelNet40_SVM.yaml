@@ -1,5 +1,5 @@
 NAME: ModelNet40_SVM
-DATA_DIR: /home/server/zrr/SimpleView/data/ #data/ModelNet/modelnet40_normal_resampled
+DATA_DIR: data/
 N_POINTS: 8192
 NUM_CATEGORY: 40
 USE_NORMALS: FALSE
