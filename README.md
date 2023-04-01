@@ -37,25 +37,24 @@ Pre-trained by ShapeNet, Point-M2AE is evaluated by **Linear SVM** on ModelNet40
 | Pre-training | ShapeNet |[point-m2ae.yaml](./cfgs/pre-training/point-m2ae.yaml)| 92.87% | 82.78% | [pre-train.pth](https://drive.google.com/file/d/1HyUEv04V2K6vMaR0P7WksuoiMtoXx1fM/view?usp=share_link) | [log](https://drive.google.com/file/d/1svx_CQ2x8dRDrf9C_jSDIXYYyJO8KG4m/view?usp=sharing) |
 
 ### Fine-tuning
-After pre-training, we fine-tune Point-M2AE on three downstream tasks:
+Synthetic shape classification on ModelNet40 with 1k points:
+| Task  | Config | Acc.| Vote| Ckpts | Logs |   
+| :-----: | :-----:| :-----:| :-----: | :-----:|:-----:|
+| Classification | [modelnet40.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/modelnet40.yaml)|93.43%| 93.96% | [modelnet40.pth](https://drive.google.com/file/d/1VvjVSGN4zA3WbTqnnB5fA8WgoiRobf9y/view?usp=share_link) | [modelnet40.log](https://drive.google.com/drive/folders/1SNYQGmfvWN5PPOKa-uA5F-0Gbz-1MajR?usp=share_link) |
 
-| Task | Dataset | Config | Acc.| Vote| Ckpts | Logs |   
-| :-----: | :-----: |:-----:| :-----:| :-----: | :-----:|:-----:|
-| Cls | ModelNet40 (1k)| [modelnet40.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/modelnet40.yaml)|93.43%| 93.96% | [modelnet40.pth](https://drive.google.com/file/d/1VvjVSGN4zA3WbTqnnB5fA8WgoiRobf9y/view?usp=share_link) | [modelnet40.log](https://drive.google.com/drive/folders/1SNYQGmfvWN5PPOKa-uA5F-0Gbz-1MajR?usp=share_link) |
+Real-world shape classification on ScanObjectNN:
+| Task | Split | Config | Acc.| Ckpts | Logs |   
+| :-----: | :-----:|:-----:| :-----:| :-----:|:-----:|
+| Classification | PB-T50-RS|[scan_pb.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_pb.yaml) | 86.43%| [scan_pd.pth](https://drive.google.com/file/d/1Fdz_I9TLThL2HZkWVGZ9p-9_WVIUOInE/view?usp=share_link) | [scan_pd.log](https://drive.google.com/drive/folders/1SNYQGmfvWN5PPOKa-uA5F-0Gbz-1MajR?usp=share_link) |
+| Classification |OBJ-BG| [scan_obj-bg.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_obj-bg.yaml) | 91.22%| - | - |
+| Classification | OBJ-ONLY| [scan_obj.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_obj.yaml) | 88.81%| - | - |
 
-
-| Task | Dataset | Split | Config | Acc.| Ckpts | Logs |   
-| :-----: | :-----: | :-----:|:-----:| :-----:| :-----:|:-----:|
-| Cls | ScanObjectNN| PB-T50-RS|[scan_pb.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_pb.yaml) | 86.43%| [scan_pd.pth](https://drive.google.com/file/d/1Fdz_I9TLThL2HZkWVGZ9p-9_WVIUOInE/view?usp=share_link) | [scan_pd.log](https://drive.google.com/drive/folders/1SNYQGmfvWN5PPOKa-uA5F-0Gbz-1MajR?usp=share_link) |
-| Cls | ScanObjectNN|OBJ-BG| [scan_obj-bg.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_obj-bg.yaml) | 91.22%| - | - |
-| Cls | ScanObjectNN| OBJ-ONLY| [scan_obj.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_obj.yaml) | 88.81%| - | - |
-
-
+Part segmentation on ShapeNetPart:
 | Task | Dataset | Config | Acc.| Vote| Ckpts | Logs |   
 | :-----: | :-----: |:-----:| :-----:| :-----: | :-----:|:-----:|
 | Segmentation | ShapeNetPart |-| 86.51% | -| - | - |
 
-
+Few-shot classification on ModelNet40:
 |  Task | Dataset | Config | 5w10s | 5w20s | 10w10s| 10w20s|     
 | :-----: | :-----: |:-----:| :-----: | :-----:|:-----:|:-----:|
 |  Few-shot Cls. | ModelNet40 |-| 96.8%|98.3%|92.3%|95.0%|
