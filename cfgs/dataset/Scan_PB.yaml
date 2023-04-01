@@ -1,0 +1,4 @@
+NAME: ScanObjectNN #Scan_PB
+ROOT: /home/server/zrr/h5_files/main_split
+SPLIT: PB
+N_POINTS: 2048

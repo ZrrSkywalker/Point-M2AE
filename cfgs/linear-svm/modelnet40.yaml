@@ -11,12 +11,12 @@ scheduler: {
     initial_epochs: 10}}
 
 dataset: {
-  train: { _base_: cfgs/dataset/ShapeNet-55.yaml,
-            others: {subset: 'train', npoints: 2048}},
-  val: { _base_: cfgs/dataset/ShapeNet-55.yaml,
-            others: {subset: 'test', npoints: 2048}},
-  test: { _base_: cfgs/dataset/ShapeNet-55.yaml,
-            others: {subset: 'test', npoints: 2048}}}
+  train: { _base_: cfgs/dataset/ModelNet40_SVM.yaml,
+            others: {partition: 'train', num_points: 1024}},
+  val: { _base_: cfgs/dataset/ModelNet40_SVM.yaml,
+            others: {partition: 'test', num_points: 1024}},
+  test: { _base_: cfgs/dataset/ModelNet40_SVM.yaml,
+            others: {partition: 'test', num_points: 1024}}}
 
 model: {
   NAME: Point_M2AE,
@@ -36,7 +36,6 @@ model: {
   drop_path_rate: 0.1,
   num_heads: 6,}
 
-npoints: 2048
 total_bs: 128
 step_per_update: 1
 max_epoch: 300
