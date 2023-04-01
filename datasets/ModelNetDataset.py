@@ -21,9 +21,8 @@ import torch
 warnings.filterwarnings('ignore')
 
 
-def load_modelnet_data(partition):
-    BASE_DIR = './'
-    DATA_DIR = os.path.join(BASE_DIR, 'data')
+def load_modelnet_data(config, partition):
+    DATA_DIR = config.DATA_DIR
     all_data = []
     all_label = []
     for h5_name in glob.glob(os.path.join(DATA_DIR, 'modelnet40_ply_hdf5_2048', 'ply_data_%s*.h5'%partition)):
@@ -36,14 +35,16 @@ def load_modelnet_data(partition):
     all_data = np.concatenate(all_data, axis=0)
     all_label = np.concatenate(all_label, axis=0)
     return all_data, all_label
+    
 
 
 @DATASETS.register_module()
-class ModelNet40SVM(Dataset):
-    def __init__(self, num_points=1024, partition='train'):
-        self.data, self.label = load_modelnet_data(partition)
-        self.num_points = num_points
-        self.partition = partition        
+class ModelNet40_SVM(Dataset):
+    # def __init__(self, num_points=1024, partition='train'):
+    def __init__(self, config): 
+        self.data, self.label = load_modelnet_data(config, config.partition)
+        self.num_points = config.num_points
+        self.partition = config.partition        
 
     def __getitem__(self, item):
         pointcloud = self.data[item][:self.num_points]
