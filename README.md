@@ -6,7 +6,7 @@
 
 Official implementation of ['Point-M2AE: Multi-scale Masked Autoencoders for Hierarchical Point Cloud Pre-training'](https://arxiv.org/pdf/2205.14401.pdf).
 
-The paper has been accepted by **NeurIPS 2022**.
+The paper has been accepted by **NeurIPS 2022** 🔥.
 
 ## News
 * Our latest work, [I2P-MAE](https://arxiv.org/pdf/2212.06785.pdf) has been accepted by **CVPR 2023** 🔥 and [open-sourced](https://github.com/ZrrSkywalker/I2P-MAE). I2P-MAE leverges 2D pre-trained models to guide the pre-training of Point-M2AE and achieves *SOTA* performance on various 3D tasks.
@@ -19,19 +19,30 @@ Point-M2AE is a strong **M**ulti-scale **M**AE pre-training framework for hierar
 </div>
 
 ## Point-M2AE Models
-The pre-trained Point-M2AE is evaluated by **Linear SVM** on both ModelNet40 and ScanObjectNN datasets, without downstream fine-tuning:
-| Task | Dataset | Config | MN40 Acc.| SONN Acc.| Ckpts | Logs |   
+
+### Pre-training
+Pre-trained by ShapeNet, Point-M2AE is evaluated by **Linear SVM** on ModelNet40 and ScanObjectNN (OBJ-BG split) datasets, without downstream fine-tuning:
+| Task | Dataset | Config | MN40 Acc.| OBJ-BG Acc.| Ckpts | Logs |   
 | :-----: | :-----: |:-----:| :-----: | :-----:| :-----:|:-----:|
-| Pre-training | ShapeNet |[point-m2ae.yaml](./cfgs/pre-training/point-m2ae.yaml)| 92.87% | 72.07% | [best-ckpt.pth](https://drive.google.com/file/d/1mkfoGSp01th9Pctlk_mE0o-5sOb3vQpD/view?usp=sharing) | [log](https://drive.google.com/file/d/1svx_CQ2x8dRDrf9C_jSDIXYYyJO8KG4m/view?usp=sharing) |
+| Pre-training | ShapeNet |[point-m2ae.yaml](./cfgs/pre-training/point-m2ae.yaml)| 92.87% | 82.78% | [pre-train.pth](https://drive.google.com/file/d/1HyUEv04V2K6vMaR0P7WksuoiMtoXx1fM/view?usp=share_link) | [log](https://drive.google.com/file/d/1svx_CQ2x8dRDrf9C_jSDIXYYyJO8KG4m/view?usp=sharing) |
 
+### Fine-tuning
 After pre-training, we fine-tune Point-M2AE on three downstream tasks:
-
-Coming in a few days.
 
 | Task | Dataset | Config | Acc.| Vote| Ckpts | Logs |   
 | :-----: | :-----: |:-----:| :-----:| :-----: | :-----:|:-----:|
 | Classification | ModelNet40 (1k)| -|93.43%| 93.96% | - | - |
-| Classification | ScanObjectNN |-| 86.43%| -| - | - |
+
+
+| Task | Dataset | Split | Config | Acc.| Ckpts | Logs |   
+| :-----: | :-----: | :-----:|:-----:| :-----:| :-----:|:-----:|
+| Classification | ScanObjectNN| OBJ-BG |-| 91.22%| - | - |
+| Classification | ScanObjectNN| OBJ-ONLY |-| 88.81%| - | - |
+| Classification | ScanObjectNN| PB-T50-RS |-| 86.43%| - | - |
+
+
+| Task | Dataset | Config | Acc.| Vote| Ckpts | Logs |   
+| :-----: | :-----: |:-----:| :-----:| :-----: | :-----:|:-----:|
 | Segmentation | ShapeNetPart |-| 86.51% | -| - | - |
 
 
