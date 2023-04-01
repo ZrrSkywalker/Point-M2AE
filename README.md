@@ -12,6 +12,15 @@ The paper has been accepted by **NeurIPS 2022** 🔥.
 * Our latest work, [I2P-MAE](https://arxiv.org/pdf/2212.06785.pdf) has been accepted by **CVPR 2023** 🔥 and [open-sourced](https://github.com/ZrrSkywalker/I2P-MAE). I2P-MAE leverges 2D pre-trained models to guide the pre-training of Point-M2AE and achieves *SOTA* performance on various 3D tasks.
 
 ## Introduction
+Comparison with existing MAE-based models for self-supervised 3D point cloud learning on ModelNet40 dataset:
+| Method | Parameters | GFlops| Extra Data | Linear SVM | Fine-tuning| Voting|
+| :-----: | :-----: |:-----:| :-----: | :-----:| :-----:| :-----:|
+| [Point-BERT](https://github.com/lulutang0608/Point-BERT) | 22.1M |4.8| -|87.4% | 92.7% | 93.2% | 
+| [ACT](https://github.com/RunpeiDong/ACT) | 22.1M |4.8| 2D|- | - | 93.7% | 
+| [Point-MAE](https://github.com/Pang-Yatian/Point-MAE) | 22.1M |4.8| -|91.0% | 93.2% | 93.8% | 
+| **Point-M2AE** | **15.3M** |**3.6**| -|**92.9%** | **93.4%** | **94.0%** | 
+| [I2P-MAE](https://github.com/ZrrSkywalker/I2P-MAE) | 15.3M |3.6| 2D|93.4% | 93.7% | 94.1% | 
+
 Point-M2AE is a strong **M**ulti-scale **M**AE pre-training framework for hierarchical self-supervised learning of 3D point clouds. Unlike the standard transformer in MAE, we modify the encoder and decoder into pyramid architectures to progressively model spatial geometries and capture both fine-grained and high-level semantics of 3D shapes. We design a multi-scale masking strategy to generate consistent visible regions across scales, and reconstruct the masked coordinates from a global-to-local perspective.
 
 <div align="center">
@@ -31,14 +40,14 @@ After pre-training, we fine-tune Point-M2AE on three downstream tasks:
 
 | Task | Dataset | Config | Acc.| Vote| Ckpts | Logs |   
 | :-----: | :-----: |:-----:| :-----:| :-----: | :-----:|:-----:|
-| Classification | ModelNet40 (1k)| -|93.43%| 93.96% | - | - |
+| Classification | ModelNet40 (1k)| [modelnet40.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/modelnet40.yaml)|93.43%| 93.96% | - | - |
 
 
 | Task | Dataset | Split | Config | Acc.| Ckpts | Logs |   
 | :-----: | :-----: | :-----:|:-----:| :-----:| :-----:|:-----:|
-| Classification | ScanObjectNN| OBJ-BG |-| 91.22%| - | - |
-| Classification | ScanObjectNN| OBJ-ONLY |-| 88.81%| - | - |
-| Classification | ScanObjectNN| PB-T50-RS |-| 86.43%| - | - |
+| Classification | ScanObjectNN| [OBJ-BG](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_obj-bg.yaml) |-| 91.22%| - | - |
+| Classification | ScanObjectNN| [OBJ-ONLY](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_obj.yaml) |-| 88.81%| - | - |
+| Classification | ScanObjectNN| [PB-T50-RS](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_pb.yaml) |-| 86.43%| - | - |
 
 
 | Task | Dataset | Config | Acc.| Vote| Ckpts | Logs |   
