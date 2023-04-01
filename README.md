@@ -6,9 +6,10 @@
 
 Official implementation of ['Point-M2AE: Multi-scale Masked Autoencoders for Hierarchical Point Cloud Pre-training'](https://arxiv.org/pdf/2205.14401.pdf).
 
-The paper has been accepted by **NeurIPS 2022** 🔥.
+The paper has been accepted by **NeurIPS 2022**.
 
 ## News
+* The fine-tuning code of Point-M2AE is released 📌.
 * Our latest work, [I2P-MAE](https://arxiv.org/pdf/2212.06785.pdf) has been accepted by **CVPR 2023** 🔥 and [open-sourced](https://github.com/ZrrSkywalker/I2P-MAE). I2P-MAE leverges 2D pre-trained models to guide the pre-training of Point-M2AE and achieves *SOTA* performance on various 3D tasks.
 
 ## Introduction
