@@ -147,6 +147,12 @@ CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/scan_obj.yaml --
 CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/scan_obj-bg.yaml --exp_name finetune --finetune_model --ckpts ckpts/pre-train.pth
 ```
 
+For ShapeNetPart, first into the `segmentation/` folder, and run:
+```bash
+cd segmentation
+CUDA_VISIBLE_DEVICES=0 python main.py --ckpts ckpts/pre-train.pth --root <path/to/data>
+```
+
 ### Evaluation
 Please download the pre-trained models from [here](https://drive.google.com/file/d/1VvjVSGN4zA3WbTqnnB5fA8WgoiRobf9y/view?usp=share_link) and put them into the folder `ckpts/`.
 
