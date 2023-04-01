@@ -40,14 +40,14 @@ After pre-training, we fine-tune Point-M2AE on three downstream tasks:
 
 | Task | Dataset | Config | Acc.| Vote| Ckpts | Logs |   
 | :-----: | :-----: |:-----:| :-----:| :-----: | :-----:|:-----:|
-| Classification | ModelNet40 (1k)| [modelnet40.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/modelnet40.yaml)|93.43%| 93.96% | [modelnet40.pth](https://drive.google.com/file/d/1VvjVSGN4zA3WbTqnnB5fA8WgoiRobf9y/view?usp=share_link) | [modelnet40.log](https://drive.google.com/drive/folders/1SNYQGmfvWN5PPOKa-uA5F-0Gbz-1MajR?usp=share_link) |
+| Cls | ModelNet40 (1k)| [modelnet40.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/modelnet40.yaml)|93.43%| 93.96% | [modelnet40.pth](https://drive.google.com/file/d/1VvjVSGN4zA3WbTqnnB5fA8WgoiRobf9y/view?usp=share_link) | [modelnet40.log](https://drive.google.com/drive/folders/1SNYQGmfvWN5PPOKa-uA5F-0Gbz-1MajR?usp=share_link) |
 
 
 | Task | Dataset | Split | Config | Acc.| Ckpts | Logs |   
 | :-----: | :-----: | :-----:|:-----:| :-----:| :-----:|:-----:|
-| Classification | ScanObjectNN| PB-T50-RS|[scan_pb.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_pb.yaml) | 86.43%| [scan_pd.pth](https://drive.google.com/file/d/1Fdz_I9TLThL2HZkWVGZ9p-9_WVIUOInE/view?usp=share_link) | [scan_pd.log](https://drive.google.com/drive/folders/1SNYQGmfvWN5PPOKa-uA5F-0Gbz-1MajR?usp=share_link) |
-| Classification | ScanObjectNN|OBJ-BG| [scan_obj-bg.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_obj-bg.yaml) | 91.22%| - | - |
-| Classification | ScanObjectNN| OBJ-ONLY| [scan_obj.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_obj.yaml) | 88.81%| - | - |
+| Cls | ScanObjectNN| PB-T50-RS|[scan_pb.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_pb.yaml) | 86.43%| [scan_pd.pth](https://drive.google.com/file/d/1Fdz_I9TLThL2HZkWVGZ9p-9_WVIUOInE/view?usp=share_link) | [scan_pd.log](https://drive.google.com/drive/folders/1SNYQGmfvWN5PPOKa-uA5F-0Gbz-1MajR?usp=share_link) |
+| Cls | ScanObjectNN|OBJ-BG| [scan_obj-bg.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_obj-bg.yaml) | 91.22%| - | - |
+| Cls | ScanObjectNN| OBJ-ONLY| [scan_obj.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_obj.yaml) | 88.81%| - | - |
 
 
 | Task | Dataset | Config | Acc.| Vote| Ckpts | Logs |   
