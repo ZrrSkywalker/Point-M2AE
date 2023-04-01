@@ -9,7 +9,7 @@ Official implementation of ['Point-M2AE: Multi-scale Masked Autoencoders for Hie
 The paper has been accepted by **NeurIPS 2022**.
 
 ## News
-* The fine-tuning code of Point-M2AE is released 📌.
+* We revise some bugs for pre-trianing and release the fine-tuning code of Point-M2AE 📌.
 * Our latest work, [I2P-MAE](https://arxiv.org/pdf/2212.06785.pdf) has been accepted by **CVPR 2023** 🔥 and [open-sourced](https://github.com/ZrrSkywalker/I2P-MAE). I2P-MAE leverges 2D pre-trained models to guide the pre-training of Point-M2AE and achieves *SOTA* performance on various 3D tasks.
 
 ## Introduction
@@ -50,9 +50,9 @@ Real-world shape classification on ScanObjectNN:
 | Classification | OBJ-ONLY| [scan_obj.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_obj.yaml) | 88.81%| - | - |
 
 Part segmentation on ShapeNetPart:
-| Task | Dataset | Config | Acc.| Vote| Ckpts | Logs |   
+| Task | Dataset | Config | mIoUc| mIoUi| Ckpts | Logs |   
 | :-----: | :-----: |:-----:| :-----:| :-----: | :-----:|:-----:|
-| Segmentation | ShapeNetPart |-| 86.51% | -| - | - |
+| Segmentation | ShapeNetPart |[segmentation](https://github.com/ZrrSkywalker/Point-M2AE/tree/main/segmentation)|84.86%| 86.51% | [seg.pth]() | [seg.log](https://drive.google.com/file/d/1kkFfj-3_Gmk7CsOO4qcoQtB8qAcJJrc9/view?usp=share_link) |
 
 Few-shot classification on ModelNet40:
 |  Task | Dataset | Config | 5w10s | 5w20s | 10w10s| 10w20s|     
@@ -116,7 +116,7 @@ Point-M2AE is pre-trained on ShapeNet dataset with the config file `cfgs/pre-tra
 CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/pre-training/point-m2ae.yaml --exp_name pre-train
 ```
 
-To evaluate the pre-trained Point-M2AE by **Linear SVM**, create the folder `ckpts/` and download the [pre-train.pth](https://drive.google.com/file/d/1HyUEv04V2K6vMaR0P7WksuoiMtoXx1fM/view?usp=share_link) into it.
+To evaluate the pre-trained Point-M2AE by **Linear SVM**, create a folder `ckpts/` and download the [pre-train.pth](https://drive.google.com/file/d/1HyUEv04V2K6vMaR0P7WksuoiMtoXx1fM/view?usp=share_link) into it. Use the configs in `cfgs/linear-svm/` and indicate the evaluation dataset by `--test_svm`.
 
 For ModelNet40, run:
 ```bash
@@ -128,29 +128,29 @@ CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/linear-svm/scan_obj-bg.yaml 
 ```
 
 ### Fine-tuning
-Please create the folder `ckpts/` and download the [pre-train.pth](https://drive.google.com/file/d/1HyUEv04V2K6vMaR0P7WksuoiMtoXx1fM/view?usp=share_link) into it.
+Please create a folder `ckpts/` and download the [pre-train.pth](https://drive.google.com/file/d/1HyUEv04V2K6vMaR0P7WksuoiMtoXx1fM/view?usp=share_link) into it. The fine-tuning configs are in `cfgs/fine-tuning/`.
 
 For ModelNet40, run:
 ```bash
-CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/ModelNet40.yaml --exp_name finetune --finetune_model --ckpts ckpts/pre-train.pth
+CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/modelnet40.yaml --finetune_model --exp_name finetune --ckpts ckpts/pre-train.pth
 ```
 
 For the three splits of ScanObjectNN, run:
 
 ```bash
-CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/scan_pb.yaml --exp_name finetune --finetune_model --ckpts ckpts/pre-train.pth
+CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/scan_pb.yaml --finetune_model --exp_name finetune --ckpts ckpts/pre-train.pth
 ```
 ```bash
-CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/scan_obj.yaml --exp_name finetune --finetune_model --ckpts ckpts/pre-train.pth
+CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/scan_obj.yaml --finetune_model --exp_name finetune --ckpts ckpts/pre-train.pth
 ```
 ```bash
-CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/scan_obj-bg.yaml --exp_name finetune --finetune_model --ckpts ckpts/pre-train.pth
+CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/scan_obj-bg.yaml --finetune_model --exp_name finetune --ckpts ckpts/pre-train.pth
 ```
 
 For ShapeNetPart, first into the `segmentation/` folder, and run:
 ```bash
 cd segmentation
-CUDA_VISIBLE_DEVICES=0 python main.py --ckpts ckpts/pre-train.pth --root <path/to/data>
+CUDA_VISIBLE_DEVICES=0 python main.py --model Point_M2AE_SEG --log_dir finetune --ckpts ./ckpts/pre-train.pth
 ```
 
 ### Evaluation
@@ -158,22 +158,22 @@ Please download the pre-trained models from [here](https://drive.google.com/file
 
 For ModelNet40 **without voting**, run:
 ```bash
-CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/modelnet40.yaml --exp_name finetune --test --ckpts ckpts/modelnet.pth
+CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/modelnet40.yaml --test --exp_name finetune --ckpts ckpts/modelnet.pth
 ```
 For ModelNet40 **with voting**, run:
 ```bash
-CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/modelnet40.yaml --exp_name finetune_vote --test --ckpts ckpts/modelnet.pth --vote
+CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/modelnet40.yaml --test --vote --exp_name finetune_vote --ckpts ckpts/modelnet.pth
 ```
 
 For the three splits of ScanObjectNN, run:
 ```bash
-CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/scan_pb.yaml --exp_name finetune --test --ckpts ckpts/scan_pb.pth
+CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/scan_pb.yaml --test --exp_name finetune --ckpts ckpts/scan_pb.pth
 ```
 ```bash
-CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/scan_obj.yaml --exp_name finetune --test --ckpts ckpts/scan_obj.pth
+CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/scan_obj.yaml --test --exp_name finetune --ckpts ckpts/scan_obj.pth
 ```
 ```bash
-CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/scan_obj-bg.yaml --exp_name finetune --test --ckpts ckpts/scan_obj-bg.pth
+CUDA_VISIBLE_DEVICES=0 python main.py --config cfgs/fine-tuning/scan_obj-bg.yaml --test --exp_name finetune --ckpts ckpts/scan_obj-bg.pth
 ```
 
 ## Acknowledgement
