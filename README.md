@@ -68,13 +68,14 @@ Create a conda environment and install basic dependencies:
 git clone https://github.com/ZrrSkywalker/Point-M2AE.git
 cd Point-M2AE
 
-conda create -n pointm2ae python=3.7
+conda create -n pointm2ae python=3.8
 conda activate pointm2ae
 
 pip install -r requirements.txt
 
 # Install the according versions of torch and torchvision
 conda install pytorch torchvision cudatoolkit
+# e.g., conda install pytorch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0 cudatoolkit=11.3
 ```
 Install GPU-related packages:
 ```bash
