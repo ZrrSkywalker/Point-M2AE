@@ -46,8 +46,8 @@ Real-world shape classification on ScanObjectNN:
 | Task | Split | Config | Acc.| Ckpts | Logs |   
 | :-----: | :-----:|:-----:| :-----:| :-----:|:-----:|
 | Classification | PB-T50-RS|[scan_pb.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_pb.yaml) | 86.43%| [scan_pd.pth](https://drive.google.com/file/d/1Fdz_I9TLThL2HZkWVGZ9p-9_WVIUOInE/view?usp=share_link) | [scan_pd.log](https://drive.google.com/drive/folders/1SNYQGmfvWN5PPOKa-uA5F-0Gbz-1MajR?usp=share_link) |
-| Classification |OBJ-BG| [scan_obj-bg.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_obj-bg.yaml) | 91.22%| - | - |
-| Classification | OBJ-ONLY| [scan_obj.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_obj.yaml) | 88.81%| - | - |
+| Classification |OBJ-BG| [scan_obj-bg.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_obj-bg.yaml) | 91.22%| [scan_obj-bg.pth](https://drive.google.com/file/d/1brd7o_2j6YoMHiJII0uf4JwE5jXLVtR2/view?usp=share_link) | [scan_obj-pd.log](https://drive.google.com/drive/folders/1SNYQGmfvWN5PPOKa-uA5F-0Gbz-1MajR?usp=share_link) |
+| Classification | OBJ-ONLY| [scan_obj.yaml](https://github.com/ZrrSkywalker/Point-M2AE/blob/main/cfgs/fine-tuning/scan_obj.yaml) | 88.81%| [scan_obj.pth](https://drive.google.com/file/d/1brd7o_2j6YoMHiJII0uf4JwE5jXLVtR2/view?usp=share_link) | [scan_obj.log](https://drive.google.com/file/d/1SuwTygM7-98LlvIPCV1U42vOgBa0IXKg/view?usp=share_link) |
 
 Part segmentation on ShapeNetPart:
 | Task | Dataset | Config | mIoUc| mIoUi| Ckpts | Logs |   
