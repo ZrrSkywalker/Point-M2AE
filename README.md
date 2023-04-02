@@ -52,7 +52,7 @@ Real-world shape classification on ScanObjectNN:
 Part segmentation on ShapeNetPart:
 | Task | Dataset | Config | mIoUc| mIoUi| Ckpts | Logs |   
 | :-----: | :-----: |:-----:| :-----:| :-----: | :-----:|:-----:|
-| Segmentation | ShapeNetPart |[segmentation](https://github.com/ZrrSkywalker/Point-M2AE/tree/main/segmentation)|84.86%| 86.51% | [seg.pth]() | [seg.log](https://drive.google.com/file/d/1kkFfj-3_Gmk7CsOO4qcoQtB8qAcJJrc9/view?usp=share_link) |
+| Segmentation | ShapeNetPart |[segmentation](https://github.com/ZrrSkywalker/Point-M2AE/tree/main/segmentation)|84.86%| 86.51% | [seg.pth](https://drive.google.com/file/d/1slnZu2ZElzd0ZfVFlvHV8IIYTLj7LXSI/view?usp=share_link) | [seg.log](https://drive.google.com/file/d/1kkFfj-3_Gmk7CsOO4qcoQtB8qAcJJrc9/view?usp=share_link) |
 
 Few-shot classification on ModelNet40:
 |  Task | Dataset | Config | 5w10s | 5w20s | 10w10s| 10w20s|     
