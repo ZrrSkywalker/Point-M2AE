@@ -19,8 +19,8 @@ Comparison with existing MAE-based models for self-supervised 3D point cloud lea
 | [Point-BERT](https://github.com/lulutang0608/Point-BERT) | 22.1M |4.8| -|87.4% | 92.7% | 93.2% | 
 | [ACT](https://github.com/RunpeiDong/ACT) | 22.1M |4.8| 2D|- | - | 93.7% | 
 | [Point-MAE](https://github.com/Pang-Yatian/Point-MAE) | 22.1M |4.8| -|91.0% | 93.2% | 93.8% | 
-| **Point-M2AE** | **15.3M** |**3.6**| -|**92.9%** | **93.4%** | **94.0%** | 
-| [I2P-MAE](https://github.com/ZrrSkywalker/I2P-MAE) | 15.3M |3.6| 2D|93.4% | 93.7% | 94.1% | 
+| **Point-M2AE** | **12.9M** |**3.6**| -|**92.9%** | **93.4%** | **94.0%** | 
+| [I2P-MAE](https://github.com/ZrrSkywalker/I2P-MAE) | 12.9M |3.6| 2D|93.4% | 93.7% | 94.1% | 
 
 Point-M2AE is a strong **M**ulti-scale **M**AE pre-training framework for hierarchical self-supervised learning of 3D point clouds. Unlike the standard transformer in MAE, we modify the encoder and decoder into pyramid architectures to progressively model spatial geometries and capture both fine-grained and high-level semantics of 3D shapes. We design a multi-scale masking strategy to generate consistent visible regions across scales, and reconstruct the masked coordinates from a global-to-local perspective.
 
